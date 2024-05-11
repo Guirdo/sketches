@@ -1,0 +1,19 @@
+---
+import Layout from "./Layout.astro";
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+    <script
+        slot="head"
+        src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.1/p5.js"></script>
+    <nav>
+        <a href="/">Guirdo's sketches </a>
+    </nav>
+    <main>
+        <slot name="title" />
+        <slot />
+        <slot name="description" />
+    </main>
+</Layout>

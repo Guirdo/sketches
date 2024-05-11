@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+import { getCollection } from 'astro:content';
+
+const allSketches = await getCollection('sketch');
+---
+
+<Layout title="Guirdo's Sketches">
+	<main>
+		<h1>Guirdo's Sketches</h1>
+		
+		<ul>
+			{
+				allSketches.map((sketch) => (
+					<li>
+						<a href={`/sketch/${sketch.slug}`}>{sketch.data.title}</a>
+					</li>
+				))
+			}
+		</ul>
+	</main>
+</Layout>
+
+<style>
+	ul {
+		
+		padding: 0rem 2rem;
+	}
+	main {
+		height: 100%;
+	}
+</style>

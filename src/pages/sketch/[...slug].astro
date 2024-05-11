@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import SketchLayout from '../../layouts/SketchLayout.astro';
+// 1. Genera una nueva ruta para cada entrada de colección
+export async function getStaticPaths() {
+  const sketches = await getCollection('sketch');
+  return sketches.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+// 2. Para tu plantilla, puedes obtener la entrada directamente de la prop
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<SketchLayout title={entry.data.title}>
+    <h1 slot="title">{entry.data.title}</h1>
+    <p slot="description">{entry.data.description}</p>
+    <Content />
+
+</SketchLayout>
+<style>
+    main {
+        padding: 1rem;
+        height: 100vh;
+    }
+</style>
